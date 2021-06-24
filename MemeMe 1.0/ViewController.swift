@@ -29,15 +29,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.bottomTextField.delegate = self
 
         topTextField.text = "TOP"
-        // TODO: - Figure out why center align not working when app run
-        topTextField.textAlignment = .left
-        bottomTextField.text = "BOTTOM"
-        bottomTextField.textAlignment = .right
         topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .center
+
+        bottomTextField.text = "BOTTOM"
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .center
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        subscribeToKeyboardShowNotifs()
+        subscribeToKeyboardHideNotifs()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
     }
 
-
+    // MARK: - Actions
     @IBAction func pickImage(_ sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -52,6 +63,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(imagePicker, animated: true, completion: nil)
     }
     
+    // MARK: - Controllers
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             imagePickerView.image = image
@@ -59,20 +71,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        subscribeToKeyboardShowNotifs()
-        subscribeToKeyboardHideNotifs()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
-    }
-    
+    // MARK: - UITextField Delegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        // clear default text on tap
-        // do not remove user input text
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
     
-    // TODO: Figure out why keyboard no longer shifts with these functions.
+    // MARK: - Keyboard Delegate
     @objc func keyboardWillShow(_ notification: Notification) {
         if bottomTextField.isFirstResponder {
             bottomConstraint.constant = -getKeyboardHeight(notification)
