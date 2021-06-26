@@ -9,32 +9,23 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    let memeText = MemeTextDelegate()
+    
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.backgroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name:"HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth: 1.0
-    ]
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
+        topTextField.delegate = memeText
+        bottomTextField.delegate = memeText
+        memeText.setStyle(textField: topTextField, position: .Top)
+        memeText.setStyle(textField: bottomTextField, position: .Bottom)
 
-        topTextField.text = "TOP"
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .center
-
-        bottomTextField.text = "BOTTOM"
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,17 +62,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - UITextField Delegate
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == "TOP" || textField.text == "BOTTOM" {
-            textField.text = ""
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+
     
     // MARK: - Keyboard Delegate
     @objc func keyboardWillShow(_ notification: Notification) {
