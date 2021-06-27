@@ -9,15 +9,17 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    // MARK: Properties
     let memeText = MemeTextDelegate()
     
+    // MARK: Outlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
         
-    
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +27,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.delegate = memeText
         memeText.setStyle(textField: topTextField, position: .Top)
         memeText.setStyle(textField: bottomTextField, position: .Bottom)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,17 +41,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     // MARK: - Actions
-    @IBAction func pickImage(_ sender: UIBarButtonItem) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .savedPhotosAlbum
-        present(imagePicker, animated: true, completion: nil)
+    @IBAction func pickAlbumImage(_ sender: UIBarButtonItem) {
+        pickImage(.savedPhotosAlbum)
     }
     
-    @IBAction func takePicture(_ sender: UIBarButtonItem) {
+    @IBAction func pickCameraImage(_ sender: UIBarButtonItem) {
+        pickImage(.camera)
+    }
+    
+    func pickImage(_ imageSourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = imageSourceType
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -61,8 +63,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         dismiss(animated: true, completion: nil)
     }
-    
-
     
     // MARK: - Keyboard Delegate
     @objc func keyboardWillShow(_ notification: Notification) {
