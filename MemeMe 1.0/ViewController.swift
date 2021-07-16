@@ -13,6 +13,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let memeText = MemeTextDelegate()
     
     // MARK: Outlets
+    @IBOutlet weak var bottomToolBar: UIToolbar!
+    @IBOutlet weak var pickImageButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -33,6 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         topToolBar.items = [shareButton, flexibleSpace, cancelButton]
+        bottomToolBar.items = [flexibleSpace, pickImageButton, cameraButton, flexibleSpace]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +59,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
+        let memeImage = [generateMemedImage()]
+        let ac = UIActivityViewController(activityItems: memeImage, applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
@@ -106,6 +112,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        topToolBar.isHidden = true
+        bottomToolBar.isHidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // TODO: Show toolbar and navbar
+        topToolBar.isHidden = false
+        bottomToolBar.isHidden = false
+        return memedImage
     }
 }
 

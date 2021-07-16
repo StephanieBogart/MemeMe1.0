@@ -46,7 +46,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJb-Wk-rDr">
-                                <rect key="frame" x="0.0" y="34" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="27" width="414" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pcz-sY-faH"/>
                                 </constraints>
@@ -81,7 +81,7 @@
                             <constraint firstItem="AOd-jX-y75" firstAttribute="bottom" secondItem="wfT-l8-cBr" secondAttribute="bottom" id="b37-Ai-acX"/>
                             <constraint firstItem="wfT-l8-cBr" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.86942" id="eKE-jg-7l4"/>
                             <constraint firstItem="Jha-Eo-15i" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="fYC-os-X80"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="rJb-Wk-rDr" secondAttribute="top" constant="10" id="rVD-ng-7mc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="rJb-Wk-rDr" secondAttribute="top" constant="17" id="rVD-ng-7mc"/>
                             <constraint firstItem="Y6n-aT-hvU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="shW-ww-If6"/>
                             <constraint firstItem="Jha-Eo-15i" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="utU-Q1-esg"/>
                         </constraints>
@@ -89,9 +89,11 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="fYC-os-X80" id="za9-hI-nQk"/>
                         <outlet property="bottomTextField" destination="AOd-jX-y75" id="rxa-BR-pdo"/>
+                        <outlet property="bottomToolBar" destination="Jha-Eo-15i" id="eFx-Eg-CDY"/>
                         <outlet property="cameraButton" destination="efJ-H6-3uF" id="izr-Yd-U6E"/>
                         <outlet property="cancelButton" destination="iqG-dm-hk9" id="oaq-W3-Af9"/>
                         <outlet property="imagePickerView" destination="wfT-l8-cBr" id="Kz1-zM-dZB"/>
+                        <outlet property="pickImageButton" destination="jAi-rA-Z1k" id="fhd-5L-SHf"/>
                         <outlet property="shareButton" destination="8HE-Dp-AZH" id="vOJ-9I-sF0"/>
                         <outlet property="topTextField" destination="Y6n-aT-hvU" id="ZwD-tm-0Oa"/>
                         <outlet property="topToolBar" destination="rJb-Wk-rDr" id="aav-FP-YnM"/>

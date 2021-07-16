@@ -5,6 +5,7 @@
 //  Created by Stephanie Bogart on 25/6/21.
 //
 
+import Foundation
 import UIKit
 
 struct Meme {
@@ -22,15 +23,15 @@ struct Meme {
     
 //    func generateMemedImage() -> UIImage {
 //        // TODO: Hide toolbar and navbar
-//        
+//
 //        // Render view to an image
 //        UIGraphicsBeginImageContext(self.view.frame.size)
 //        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
 //        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
 //        UIGraphicsEndImageContext()
-//        
+//
 //        // TODO: Show toolbar and navbar
-//        
+//
 //        return memedImage
 //    }
 }
