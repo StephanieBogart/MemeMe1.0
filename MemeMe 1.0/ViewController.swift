@@ -18,7 +18,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-        
+    @IBOutlet weak var topToolBar: UIToolbar!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.delegate = memeText
         memeText.setStyle(textField: topTextField, position: .Top)
         memeText.setStyle(textField: bottomTextField, position: .Bottom)
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        topToolBar.items = [shareButton, flexibleSpace, cancelButton]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +53,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func pickCameraImage(_ sender: UIBarButtonItem) {
         pickImage(.camera)
+    }
+    
+    @IBAction func shareMeme(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
     }
     
     func pickImage(_ imageSourceType: UIImagePickerController.SourceType) {

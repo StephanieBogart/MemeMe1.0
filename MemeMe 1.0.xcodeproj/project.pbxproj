@@ -8,16 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		3D21FC8B2686BCA000999A72 /* MemeTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21FC8A2686BCA000999A72 /* MemeTextDelegate.swift */; };
+		3D21FC8D2686C0F600999A72 /* KeyboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21FC8C2686C0F600999A72 /* KeyboardDelegate.swift */; };
 		3D9B14A2267F7AA700B054E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B14A1267F7AA700B054E7 /* AppDelegate.swift */; };
 		3D9B14A4267F7AA700B054E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B14A3267F7AA700B054E7 /* SceneDelegate.swift */; };
 		3D9B14A6267F7AA700B054E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B14A5267F7AA700B054E7 /* ViewController.swift */; };
 		3D9B14A9267F7AA700B054E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B14A7267F7AA700B054E7 /* Main.storyboard */; };
 		3D9B14AB267F7AAB00B054E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B14AA267F7AAB00B054E7 /* Assets.xcassets */; };
 		3D9B14AE267F7AAB00B054E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B14AC267F7AAB00B054E7 /* LaunchScreen.storyboard */; };
+		3DF7D69B2686D3480040D918 /* MemeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF7D69A2686D3480040D918 /* MemeObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D21FC8A2686BCA000999A72 /* MemeTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextDelegate.swift; sourceTree = "<group>"; };
+		3D21FC8C2686C0F600999A72 /* KeyboardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDelegate.swift; sourceTree = "<group>"; };
 		3D9B149E267F7AA600B054E7 /* MemeMe 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MemeMe 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9B14A1267F7AA700B054E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D9B14A3267F7AA700B054E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		3D9B14AA267F7AAB00B054E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9B14AD267F7AAB00B054E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D9B14AF267F7AAB00B054E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DF7D69A2686D3480040D918 /* MemeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				3D9B14AC267F7AAB00B054E7 /* LaunchScreen.storyboard */,
 				3D9B14AF267F7AAB00B054E7 /* Info.plist */,
 				3D21FC8A2686BCA000999A72 /* MemeTextDelegate.swift */,
+				3D21FC8C2686C0F600999A72 /* KeyboardDelegate.swift */,
+				3DF7D69A2686D3480040D918 /* MemeObject.swift */,
 			);
 			path = "MemeMe 1.0";
 			sourceTree = "<group>";
@@ -140,9 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF7D69B2686D3480040D918 /* MemeObject.swift in Sources */,
 				3D9B14A6267F7AA700B054E7 /* ViewController.swift in Sources */,
 				3D21FC8B2686BCA000999A72 /* MemeTextDelegate.swift in Sources */,
 				3D9B14A2267F7AA700B054E7 /* AppDelegate.swift in Sources */,
+				3D21FC8D2686C0F600999A72 /* KeyboardDelegate.swift in Sources */,
 				3D9B14A4267F7AA700B054E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +299,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HU57T59XB;
 				INFOPLIST_FILE = "MemeMe 1.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -8,9 +8,6 @@
 import UIKit
 
 class MemeTextDelegate: UIViewController, UITextFieldDelegate {
-
-
-    
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -24,14 +21,12 @@ class MemeTextDelegate: UIViewController, UITextFieldDelegate {
     }
     
     func setStyle(textField: UITextField, position: Position) {
-        
         switch position {
         case .Top:
             textField.text = "TOP"
         case .Bottom:
             textField.text = "BOTTOM"
         }
-        
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
     }
