@@ -15,20 +15,12 @@ class MemeTextDelegate: UIViewController, UITextFieldDelegate {
         NSAttributedString.Key.font: UIFont(name:"HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedString.Key.strokeWidth: 1.0
     ]
-    
-    enum Position: String {
-        case Top, Bottom
-    }
-    
-    func setStyle(textField: UITextField, position: Position) {
-        switch position {
-        case .Top:
-            textField.text = "TOP"
-        case .Bottom:
-            textField.text = "BOTTOM"
-        }
+
+    func setStyle(textField: UITextField, text: String) {
+        textField.text = text
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
+        textField.delegate = self
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

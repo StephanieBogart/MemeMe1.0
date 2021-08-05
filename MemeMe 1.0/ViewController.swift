@@ -28,10 +28,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         // Set up Meme placeholder content
-        topTextField.delegate = memeText
-        bottomTextField.delegate = memeText
-        memeText.setStyle(textField: topTextField, position: .Top)
-        memeText.setStyle(textField: bottomTextField, position: .Bottom)
+        memeText.setStyle(textField: topTextField, text: "TOP")
+        memeText.setStyle(textField: bottomTextField, text: "BOTTOM")
         
         // Set up top and bottom bars
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
@@ -41,8 +39,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(_ animated: Bool) {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        subscribeToKeyboardShowNotifs()
-        subscribeToKeyboardHideNotifs()
+        // Set the observers up for keyboards to track behaviour
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,6 +62,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memeImage = [generateMemedImage()]
         let activityViewController = UIActivityViewController(activityItems: memeImage, applicationActivities: nil)
         present(activityViewController, animated: true)
+  
+//         User a completion handler to avoid saving the image if the share activity is dismissed
+//        activityViewController.completionWithItemsHandler = {
+//                    _, completed, _, _ in
+//                    if completed {
+//                        //save
+//                    }
+//                }
     }
     
     func pickImage(_ imageSourceType: UIImagePickerController.SourceType) {
@@ -99,21 +106,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.cgRectValue.height
     }
     
-    func subscribeToKeyboardShowNotifs() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    func subscribeToKeyboardHideNotifs() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func generateMemedImage() -> UIImage {
-        // Prep the UI to share an image
+        // Prep the UI to share an image by removing the toolbars
         toggleUIToolbars(show: false)
 
         
@@ -129,13 +128,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func toggleUIToolbars(show: Bool) {
-        if !show {
-            topToolBar.isHidden = true
-            bottomToolBar.isHidden = true
-        } else {
-            topToolBar.isHidden = false
-            bottomToolBar.isHidden = false
-        }
+        topToolBar.isHidden = show
+        bottomToolBar.isHidden = show
     }
 }
 
