@@ -22,19 +22,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set up Meme placeholder content
         topTextField.delegate = memeText
         bottomTextField.delegate = memeText
         memeText.setStyle(textField: topTextField, position: .Top)
         memeText.setStyle(textField: bottomTextField, position: .Bottom)
         
+        // Set up top and bottom bars
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        topToolBar.items = [shareButton, flexibleSpace, cancelButton]
+        topToolBar.items = [shareButton, flexibleSpace]
         bottomToolBar.items = [flexibleSpace, pickImageButton, cameraButton, flexibleSpace]
     }
     
@@ -60,11 +61,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
         let memeImage = [generateMemedImage()]
-        let ac = UIActivityViewController(activityItems: memeImage, applicationActivities: nil)
-        present(ac, animated: true)
-    }
-    
-    @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
+        let activityViewController = UIActivityViewController(activityItems: memeImage, applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
     
     func pickImage(_ imageSourceType: UIImagePickerController.SourceType) {
@@ -115,9 +113,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
-        topToolBar.isHidden = true
-        bottomToolBar.isHidden = true
+        // Prep the UI to share an image
+        toggleUIToolbars(show: false)
+
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -125,10 +123,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        // TODO: Show toolbar and navbar
-        topToolBar.isHidden = false
-        bottomToolBar.isHidden = false
+        // Restore the toolbars after screenshot taken
+        toggleUIToolbars(show: true)
         return memedImage
+    }
+    
+    func toggleUIToolbars(show: Bool) {
+        if !show {
+            topToolBar.isHidden = true
+            bottomToolBar.isHidden = true
+        } else {
+            topToolBar.isHidden = false
+            bottomToolBar.isHidden = false
+        }
     }
 }
 

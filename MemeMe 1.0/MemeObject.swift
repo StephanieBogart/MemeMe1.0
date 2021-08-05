@@ -20,18 +20,4 @@ struct Meme {
                         originalImage: originalImage,
                         memedImage: memedImage)
     }
-    
-//    func generateMemedImage() -> UIImage {
-//        // TODO: Hide toolbar and navbar
-//
-//        // Render view to an image
-//        UIGraphicsBeginImageContext(self.view.frame.size)
-//        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-//        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//
-//        // TODO: Show toolbar and navbar
-//
-//        return memedImage
-//    }
 }
